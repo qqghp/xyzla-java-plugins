@@ -1,6 +1,6 @@
 package com.xyzla.common.exception;
 
-public class ApiAccessException extends XyzlaException {
+public class ApiAccessException extends Exception {
     private Integer code;
     private String msg;
 

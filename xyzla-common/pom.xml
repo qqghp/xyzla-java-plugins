@@ -58,8 +58,15 @@
         </dependency>
 
 
-        <!-- google -->
+        <!-- csv -->
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <optional>true</optional>
+        </dependency>
 
+
+        <!-- google -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>

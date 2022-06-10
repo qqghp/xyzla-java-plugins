@@ -1,6 +1,6 @@
 package com.xyzla.common.exception;
 
-public class RoadException extends XyzlaException {
+public class RoadException extends Exception {
 
     private static final long serialVersionUID = 2770315231512637987L;
     private String stepDesc;
