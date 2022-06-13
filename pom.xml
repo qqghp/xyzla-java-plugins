@@ -14,6 +14,8 @@
 
     <modules>
         <module>xyzla-common</module>
+        <module>xyzla-spring</module>
+
     </modules>
 
     <properties>
@@ -497,6 +499,7 @@
                     <include>**/*.png</include>
                     <include>**/*.gif</include>
                     <include>**/*.php</include>
+                    <include>**/*.factories</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>
@@ -509,7 +512,6 @@
             </resource>
         </resources>
 
-
         <plugins>
 
 
@@ -520,9 +522,9 @@
     <profiles>
         <profile>
             <id>release</id>
-<!--            <activation>-->
-<!--                <activeByDefault>true</activeByDefault>-->
-<!--            </activation>-->
+            <!--            <activation>-->
+            <!--                <activeByDefault>true</activeByDefault>-->
+            <!--            </activation>-->
             <build>
                 <plugins>
                     <plugin>
