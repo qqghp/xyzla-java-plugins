@@ -14,7 +14,6 @@ import java.util.zip.ZipInputStream;
 
 // https://blog.csdn.net/qq_24499615/article/details/84728313
 // 解决 中文 解析失败 https://blog.csdn.net/u010018421/article/details/53222291
-@Service
 public class ZipFileUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(ZipFileUtil.class);

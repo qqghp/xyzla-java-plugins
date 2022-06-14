@@ -9,6 +9,10 @@ public class ResBean {
     private String msg;
     private Object data;
 
+
+    public ResBean() {
+    }
+
     public ResBean(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
