@@ -16,6 +16,7 @@
         <module>xyzla-common</module>
         <module>xyzla-spring</module>
         <module>xyzla-spring-boot-kafka</module>
+        <module>xyzla-logback</module>
 
     </modules>
 

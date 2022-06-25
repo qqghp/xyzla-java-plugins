@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>xyzla-java-plugins</artifactId>
+        <groupId>com.xyzla</groupId>
+        <version>1.1.2</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>xyzla-logback</artifactId>
+    <name>xyzla-logback</name>
+    <description>xyzla-logback</description>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!--
+              Logback
+              logback-ext-spring : 是为了和 Spring 一起使用。
+              jcl-over-slf4j : commons-logging 到 slf4j 的桥梁, 此时不需要设置 logback.xml 也可以输出日志。
+              jul-to-slf4j : java.util.logging.Logger 到 slf4j 的桥梁
+
+              https://www.cnblogs.com/EasonJim/p/7810852.html
+              -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.logback-extensions</groupId>
+            <artifactId>logback-ext-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

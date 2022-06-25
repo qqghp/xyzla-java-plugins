@@ -30,18 +30,23 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- custom -->
         <dependency>
             <groupId>com.xyzla</groupId>
             <artifactId>kafka-spring-boot-starter</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.xyzla</groupId>
             <artifactId>xyzla-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>com.xyzla</groupId>
+            <artifactId>xyzla-logback</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
 
     </dependencies>
 
