@@ -23,7 +23,7 @@ public class CsvService {
     private static final Logger logger = LoggerFactory.getLogger(CsvService.class);
 
     @Async
-    public void write(String filePath, String[] headers, String[] data) throws IOException {
+    public void write(String filePath, String[] data) throws IOException {
         LocalDate localDate = LocalDate.now();
         Path path = Paths.get(filePath);
         logger.debug("csv path {}", path);
@@ -33,8 +33,9 @@ public class CsvService {
             if (!Files.exists(path.getParent())) {
                 Files.createDirectories(path.getParent());
             }
+            // try write csv headers.
             try (CSVWriter writer = new CSVWriter(new FileWriter(path.toString()))) {
-                writer.writeNext(headers);
+                writer.writeNext(data);
             } catch (IOException e) {
                 e.printStackTrace();
             }
