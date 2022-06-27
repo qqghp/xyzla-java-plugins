@@ -1,0 +1,11 @@
+kafka:
+  bootstrap-servers: '"KAFKA Bootstrap Servers"'
+  client-mark: '"Your Project Name"'
+  consumer:
+    enabled: '"取值为 true or false"'
+    group-id: '"Kafka Conumser Group ID, 通常取值为 Group-{Proejct Name}"'
+  producer:
+    enabled: '"取值为 true or false"'
+mq:
+  topic:
+    prefix: '"Topic 前缀, 通常取值为 ${spring.profiles.active}"'
