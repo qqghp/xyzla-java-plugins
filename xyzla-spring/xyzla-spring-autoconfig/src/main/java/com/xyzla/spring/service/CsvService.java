@@ -33,12 +33,6 @@ public class CsvService {
             if (!Files.exists(path.getParent())) {
                 Files.createDirectories(path.getParent());
             }
-            // try write csv headers.
-            try (CSVWriter writer = new CSVWriter(new FileWriter(path.toString()))) {
-                writer.writeNext(data);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
         // default all fields are enclosed in double quotes
