@@ -6,7 +6,7 @@
 
     <groupId>com.xyzla</groupId>
     <artifactId>xyzla-java-plugins</artifactId>
-    <version>1.1.7</version>
+    <version>1.1.8</version>
     <packaging>pom</packaging>
 
     <name>xyzla-java-plugins</name>
@@ -20,6 +20,7 @@
         <module>xyzla-spring</module>
         <module>xyzla-spring-boot-kafka</module>
         <module>xyzla-logback</module>
+        <module>xyzla-spring-boot-dingbot</module>
 
     </modules>
 

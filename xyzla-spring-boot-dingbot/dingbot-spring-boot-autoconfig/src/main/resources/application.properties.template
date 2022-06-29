@@ -1,0 +1,4 @@
+dingbot.prefix=https://oapi.dingtalk.com/robot/send
+dingbot.access-token=change-to-your-access-token
+dingbot.secret.secret-enabled="true or false"
+dingbot.secret.secret-token=change-to-your-secret-token

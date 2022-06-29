@@ -76,7 +76,7 @@
     <logger name="ch.qos.logback" level="INFO"/>
     <logger name="org.apache.kafka" level="INFO"/>
     <logger name="io.undertow" level="INFO"></logger>
-    <logger name="com.showmac" level="INFO"/>
+    <logger name="com.xyzla" level="INFO"/>
 
     <logger name="java.sql" level="DEBUG">
         <appender-ref ref="STDOUT"/>

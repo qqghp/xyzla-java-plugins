@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         String brokerList = "192.168.31.81:9092,192.168.31.82:9092,192.168.31.83:9092";
-        String groupId = "showmac-sms-group";
+        String groupId = "xyzla-sms-group";
         String topic = "topic-demo";
 
         ConsumerProperty consumerProperty = new ConsumerProperty(brokerList, groupId);

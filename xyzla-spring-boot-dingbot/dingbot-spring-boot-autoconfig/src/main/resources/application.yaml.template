@@ -1,0 +1,6 @@
+dingbot:
+  prefix: https://oapi.dingtalk.com/robot/send
+  access-token: change-to-your-access-token
+  secret:
+    secret-enabled: false
+    secret-token: change-to-your-secret-token

@@ -1,7 +1,7 @@
-package com.showmac.controller;
+package com.xyzla.controller;
 
-import com.showmac.entity.SmsMessageEntity;
-import com.showmac.entity.TopicDemoEntity;
+import com.xyzla.entity.SmsMessageEntity;
+import com.xyzla.entity.TopicDemoEntity;
 import com.xyzla.mq.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

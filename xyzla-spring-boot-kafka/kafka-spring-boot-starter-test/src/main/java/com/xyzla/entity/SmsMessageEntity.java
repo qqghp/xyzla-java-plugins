@@ -1,4 +1,4 @@
-package com.showmac.entity;
+package com.xyzla.entity;
 
 public class SmsMessageEntity {
     private String id;

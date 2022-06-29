@@ -1,0 +1,20 @@
+dingbot:
+  prefix: https://oapi.dingtalk.com/robot/send
+  access-token: 0ac1ca807d61a0d7454be72579bf0dd9b25794602251e94caccfad2fe41dee59
+  secret:
+    secret-enabled: true
+    secret-token: SEC6f07df7733769eee8621cee311e9f251bf69ed389b4e41bcd40ee5c5399c9686
+
+monitor:
+  flow-usage:
+    daily-threshold: 1048576
+    monthly-threshold: 31457280
+
+
+logging:
+  level:
+    com.xyzla: debug
+    org.apache: warn
+    org.springframework: warn
+    com.netflix: warn
+    com.amazon.sqs: error
