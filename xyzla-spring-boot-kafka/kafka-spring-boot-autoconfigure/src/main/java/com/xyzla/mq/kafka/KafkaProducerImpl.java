@@ -37,8 +37,9 @@ public class KafkaProducerImpl implements Producer {
      */
     public void send(String topic, String message) {
         String realTopic = kafkaContext.getRealTopic(topic);
-        logger.info("kafka send {} -> {} -> {}", topic, realTopic, message);
-
+        if (logger.isDebugEnabled()) {
+            logger.debug("kafka send {} -> {} -> {}", topic, realTopic, message);
+        }
         kafkaProducer.send(new ProducerRecord<>(realTopic, message), new Callback() {
             @Override
             public void onCompletion(RecordMetadata metadata, Exception exception) {
