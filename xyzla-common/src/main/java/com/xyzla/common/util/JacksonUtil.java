@@ -4,12 +4,16 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
 
 /* json 字符与对像转换 */
 public final class JacksonUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(JacksonUtil.class);
 
     private static ObjectMapper objectMapper;
 
@@ -28,7 +32,7 @@ public final class JacksonUtil {
         try {
             return objectMapper.readValue(jsonStr, valueType);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("", e);
         }
 
         return null;
@@ -43,7 +47,7 @@ public final class JacksonUtil {
         try {
             return objectMapper.readValue(jsonStr, valueTypeRef);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("", e);
         }
 
         return null;
@@ -58,7 +62,7 @@ public final class JacksonUtil {
         try {
             return objectMapper.readValue(jsonStr, javaType);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("", e);
         }
         return null;
     }
@@ -84,7 +88,7 @@ public final class JacksonUtil {
             JavaType javaType = getCollectionType(objectMapper, List.class, valueType);
             return objectMapper.readValue(jsonStr, javaType);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("", e);
         }
 
         return null;

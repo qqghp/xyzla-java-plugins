@@ -39,8 +39,12 @@ public class RestTemplateLogRecordInterceptor implements ClientHttpRequestInterc
 
     private void traceResponse(ClientHttpResponse response) throws IOException {
         LOGGER.debug("============================response begin==========================================");
-        LOGGER.debug("Status code  : {}", response.getStatusCode());
-        LOGGER.debug("Status text  : {}", response.getStatusText());
+
+        LOGGER.debug("Raw status code  : {}", response.getRawStatusCode());
+
+        // LOGGER.debug("Status code  : {}", response.getStatusCode());
+        // LOGGER.debug("Status text  : {}", response.getStatusText());
+
         LOGGER.debug("Headers      : {}", response.getHeaders());
         LOGGER.debug("Content-Type : {}", response.getHeaders().getContentType());
 
