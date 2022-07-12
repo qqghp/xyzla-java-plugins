@@ -6,7 +6,7 @@
 
     <groupId>com.xyzla</groupId>
     <artifactId>xyzla-java-plugins</artifactId>
-    <version>1.1.9</version>
+    <version>1.1.10</version>
     <packaging>pom</packaging>
 
     <name>xyzla-java-plugins</name>
@@ -69,18 +69,30 @@
         <url>https://github.com/qqghp/xyzla-java-plugins/tree/master</url>
     </scm>
 
+<!--    <distributionManagement>-->
+<!--        <repository>-->
+<!--            <id>ossrh</id>-->
+<!--            &lt;!&ndash; <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>&ndash;&gt;-->
+<!--            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+<!--        </repository>-->
+<!--        <snapshotRepository>-->
+<!--            <id>ossrh</id>-->
+<!--            &lt;!&ndash; <url>https://oss.sonatype.org/content/repositories/snapshots</url>&ndash;&gt;-->
+<!--            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>-->
+<!--        </snapshotRepository>-->
+<!--    </distributionManagement>-->
+
     <distributionManagement>
         <repository>
-            <id>ossrh</id>
-            <!-- <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>libs-release-local</id>
+            <url>http://repository.showmac.tech/artifactory/libs-release-local/</url>
         </repository>
         <snapshotRepository>
-            <id>ossrh</id>
-            <!-- <url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+            <id>libs-snapshot-local</id>
+            <url>http://repository.showmac.tech/artifactory/libs-snapshot-local/</url>
         </snapshotRepository>
     </distributionManagement>
+
 
     <dependencyManagement>
         <dependencies>
