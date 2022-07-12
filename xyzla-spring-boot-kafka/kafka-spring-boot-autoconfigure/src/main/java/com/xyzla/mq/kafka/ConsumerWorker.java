@@ -56,7 +56,7 @@ public class ConsumerWorker<T> implements Runnable {
             consumerMessageBO.setT(t);
             consumer.onMessage(consumerMessageBO);
         } catch (Exception ex) {
-            logger.error("", ex);
+            logger.error("consumer exception. offset {} partition {} value {} ... {}", consumerRecord.offset(), consumerRecord.partition(), consumerRecord.value(), ex);
         }
     }
 
