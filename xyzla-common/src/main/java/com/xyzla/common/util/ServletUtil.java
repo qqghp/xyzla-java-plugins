@@ -57,6 +57,7 @@ public final class ServletUtil {
         } catch (Exception e) {
             logger.error("", e);
         }
+        ip = (ip == null) ? "-" : ip;
         return ip;
     }
 
