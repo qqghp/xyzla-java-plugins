@@ -1,0 +1,52 @@
+{
+  "properties": [
+    {
+      "name": "spring.redis.lettuce.pool.max-active",
+      "type": "java.lang.Integer",
+      "description": "Redis Pool Max Active, include token.",
+      "defaultValue": 50
+    },
+    {
+      "name": "spring.redis.lettuce.pool.max-idle",
+      "type": "java.lang.Integer",
+      "description": "Redis Pool Max Idle, not include any parameters.",
+      "defaultValue": 50
+    },
+    {
+      "name": "spring.redis.lettuce.pool.min-idle",
+      "type": "java.lang.Integer",
+      "description": "Redis Pool Max Idle, not include any parameters.",
+      "defaultValue": 10
+    },
+    {
+      "name": "spring.redis.lettuce.pool.max-wait",
+      "type": "java.lang.Integer",
+      "description": "Redis Pool Max Wait.",
+      "defaultValue": 5000
+    },
+    {
+      "name": "spring.redis.host",
+      "type": "java.lang.String",
+      "description": "Redis Host.",
+      "defaultValue": "127.0.0.1"
+    },
+    {
+      "name": "spring.redis.port",
+      "type": "java.lang.Integer",
+      "description": "Redis Port.",
+      "defaultValue": 6379
+    },
+    {
+      "name": "spring.redis.timeout",
+      "type": "java.lang.Integer",
+      "description": "Redis Timeout.",
+      "defaultValue": 6000
+    },
+    {
+      "name": "spring.redis.database",
+      "type": "java.lang.Integer",
+      "description": "Redis Database.",
+      "defaultValue": 0
+    }
+  ]
+}
