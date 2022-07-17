@@ -1,11 +1,11 @@
 package com.xyzla.common.util;
 
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,6 +17,21 @@ public final class JacksonUtil {
 
     private static ObjectMapper objectMapper;
 
+
+    static {
+        // 在反序列化时忽略在 JSON 字符串中 存在，而在 Java 中不存在的属性
+        objectMapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        // 关键代码-解决No serializer found for class java.lang.Object异常
+//        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+//        objectMapper.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>() {
+//            @Override
+//            public void serialize(Object o, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+//                //jsonGenerator.writeString("");//空串
+//                jsonGenerator.writeObject(new Object());//空对象
+//            }
+//        });
+    }
+
     /*
      * 使用泛型方法，把 json 字符串转换为相应的 JavaBean 对象。 <br>
      * (1) 转换为普通 JavaBean: readValue(json,Student.class)<br>
@@ -24,11 +39,6 @@ public final class JacksonUtil {
      * 然后使用 Arrays.asList(); 方法把得到的数组转换为特定类型的 List
      */
     public static <T> T readValue(String jsonStr, Class<T> valueType) {
-        if (objectMapper == null) {
-            // 在反序列化时忽略在 JSON 字符串中 存在，而在 Java 中不存在的属性
-            objectMapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        }
-
         try {
             return objectMapper.readValue(jsonStr, valueType);
         } catch (Exception e) {
@@ -40,10 +50,6 @@ public final class JacksonUtil {
 
     /* json 数组转 List */
     public static <T> T readValue(String jsonStr, TypeReference<T> valueTypeRef) {
-        if (objectMapper == null) {
-            objectMapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        }
-
         try {
             return objectMapper.readValue(jsonStr, valueTypeRef);
         } catch (Exception e) {
@@ -54,9 +60,6 @@ public final class JacksonUtil {
     }
 
     public static <T> T readValueExt(String jsonStr, Class klass) {
-        if (objectMapper == null) {
-            objectMapper = new ObjectMapper();
-        }
         JavaType javaType =
                 objectMapper.getTypeFactory().constructCollectionType(List.class, klass);
         try {
@@ -81,8 +84,6 @@ public final class JacksonUtil {
     }
 
     public static <T> List readValueOfList(String jsonStr, Class<T> valueType) {
-        // 在反序列化时忽略在 JSON 字符串中 存在，而在 Java 中不存在的属性
-        ObjectMapper objectMapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
         try {
             JavaType javaType = getCollectionType(objectMapper, List.class, valueType);
@@ -97,10 +98,6 @@ public final class JacksonUtil {
 
     /* 把 JavaBean 转换为 json 字符串 */
     public static String toJson(Object object) {
-        if (objectMapper == null) {
-            objectMapper = new ObjectMapper();
-        }
-
 //        final SimpleModule localDateTimeSerialization = new SimpleModule();
 //        localDateTimeSerialization.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
 //        localDateTimeSerialization.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
