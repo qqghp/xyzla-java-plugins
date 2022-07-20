@@ -53,10 +53,10 @@ public class ConsumerHandler {
         // https://blog.csdn.net/timothytt/article/details/119175571
 
         // 拉取时间间隔, 默认值: 300 秒; 每次拉取的记录必须在该时间内消费完
-        // props.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, "100000"); // 100 秒
-        props.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, "300000"); // 5 分钟
+        props.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, "100000"); // 100 秒
+        // props.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, "300000"); // 5 分钟
         // 每次拉取条数, 默认值: 500 条; 这个条数一定要结合业务背景合理设置
-        props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "10"); // 每一批数据 10 条
+        props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "5"); // 每一批数据 10 条
         // 每次拉取最大等待时间；时间达到或者消息大小谁先满足条件都触发，没有消息但时间达到返回空消息体
         props.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, "4096"); // 4KB
         //向协调器发送心跳的时间间隔, 默认值: 3 秒; 建议不超过 session.timeout.ms 的1/3
