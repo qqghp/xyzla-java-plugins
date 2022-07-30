@@ -6,7 +6,7 @@
 
     <groupId>com.xyzla</groupId>
     <artifactId>xyzla-java-plugins</artifactId>
-    <version>1.1.12</version>
+    <version>1.1.14</version>
     <packaging>pom</packaging>
 
     <name>xyzla-java-plugins</name>
@@ -172,22 +172,22 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>2.13.1</version>
+                <version>2.13.3</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.13.1</version>
+                <version>2.13.3</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.datatype</groupId>
                 <artifactId>jackson-datatype-jsr310</artifactId>
-                <version>2.13.1</version>
+                <version>2.13.3</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
-                <version>2.13.1</version>
+                <version>2.13.3</version>
             </dependency>
 
             <!--- common component -->

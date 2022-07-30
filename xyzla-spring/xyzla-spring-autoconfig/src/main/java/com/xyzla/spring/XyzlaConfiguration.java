@@ -11,14 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class SpringConfiguration {
-    private static final Logger logger = LoggerFactory.getLogger(SpringConfiguration.class);
-
-    @Bean("springUtils")
-    public SpringUtils springUtils() {
-        logger.info("SpringUtils initialization ...");
-        return new SpringUtils();
-    }
+public class XyzlaConfiguration {
+    private static final Logger logger = LoggerFactory.getLogger(XyzlaConfiguration.class);
 
     @Bean("csvService")
     @ConditionalOnClass(CSVWriter.class)

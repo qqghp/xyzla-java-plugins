@@ -1,11 +1,12 @@
 package com.xyzla.common.util;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,17 +20,30 @@ public final class JacksonUtil {
 
 
     static {
+//        objectMapper = JsonMapper.builder()
+//                .findAndAddModules()
+//                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+//                .build();
+
         // 在反序列化时忽略在 JSON 字符串中 存在，而在 Java 中不存在的属性
-        objectMapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        objectMapper = new ObjectMapper();
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .registerModule(new ParameterNamesModule())
+                .registerModule(new Jdk8Module())
+                .registerModule(new JavaTimeModule());
+
+        // objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+
         // 关键代码-解决No serializer found for class java.lang.Object异常
-//        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-//        objectMapper.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>() {
-//            @Override
-//            public void serialize(Object o, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-//                //jsonGenerator.writeString("");//空串
-//                jsonGenerator.writeObject(new Object());//空对象
-//            }
-//        });
+        // objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        // objectMapper.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>() {
+        //     @Override
+        //     public void serialize(Object o, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+        //         //jsonGenerator.writeString("");//空串
+        //         jsonGenerator.writeObject(new Object());//空对象
+        //     }
+        // });
     }
 
     /*
@@ -98,17 +112,11 @@ public final class JacksonUtil {
 
     /* 把 JavaBean 转换为 json 字符串 */
     public static String toJson(Object object) {
-//        final SimpleModule localDateTimeSerialization = new SimpleModule();
-//        localDateTimeSerialization.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
-//        localDateTimeSerialization.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
-//        objectMapper.registerModule(localDateTimeSerialization);
-
         try {
             return objectMapper.writeValueAsString(object);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
 }

@@ -51,7 +51,7 @@ public abstract class BaseApi {
             stopWatch.start();
             Object result = supplier.get();
             stopWatch.stop();
-            logger.info("uri {} method {} header {} cost {} seconds", uri, method, apiVersion, stopWatch.getTotalTimeSeconds());
+            logger.info("uri {} method {} header {} cost {} millis", uri, method, apiVersion, stopWatch.getTotalTimeMillis());
             if (result == null) {
                 return ResBean.ofSuccess();
             } else if (result instanceof ResBean) {

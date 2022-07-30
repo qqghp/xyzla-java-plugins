@@ -89,7 +89,7 @@ public abstract class Consumer<T> {
     /**
      * 线程池 工厂, 主要作用是給线程 (自定义) 命名
      */
-    private static class NameTreadFactory implements ThreadFactory {
+    protected static class NameTreadFactory implements ThreadFactory {
 
         private final AtomicInteger mThreadNum = new AtomicInteger(1);
 

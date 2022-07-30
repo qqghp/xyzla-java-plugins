@@ -2,9 +2,9 @@ package com.xyzla.common.http;
 
 
 import com.xyzla.common.exception.ConnTimeOutException;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import javax.net.ssl.*;
 import java.io.BufferedReader;
@@ -40,11 +40,9 @@ public class HttpConnector {
      * @param params 如果没有则为空
      */
     private static String connect(String url, String params, boolean isSSL, String method, Map<String, String> headers) throws Exception {
-
         if (isSSL) {
             _ignoreSSL();
         }
-
         HttpURLConnection conn = null;
         OutputStreamWriter out = null;
         BufferedReader in = null;
@@ -76,7 +74,7 @@ public class HttpConnector {
             conn.setUseCaches(false);
             conn.setDoOutput(true);
             conn.setDoInput(true);
-            if (StringUtils.isNotBlank(params)) {
+            if (StringUtils.hasText(params)) {
                 conn.setRequestProperty("Content-Length", "" + params.length());
             }
             if (headers != null && !headers.isEmpty()) {
@@ -91,7 +89,7 @@ public class HttpConnector {
             }
 
             if ("POST".equals(method)) {
-                if (StringUtils.isNotBlank(params)) {
+                if (StringUtils.hasText(params)) {
                     out = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
                     out.write(params);
                     out.close();
@@ -150,7 +148,7 @@ public class HttpConnector {
             }
         } catch (IOException e) {
             StringBuffer errorMsg = new StringBuffer();
-            String line = StringUtils.EMPTY;
+            String line = "";
             in = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "utf-8"));
             while ((line = in.readLine()) != null) {
                 errorMsg.append(line).append("\n");
