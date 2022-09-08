@@ -1,0 +1,28 @@
+{
+  "properties": [
+    {
+      "name": "dingbot.prefix",
+      "type": "java.lang.String",
+      "description": "DingTalk's WebHook url prefix, not include any parameters.",
+      "defaultValue": "https://oapi.dingtalk.com/robot/send"
+    },
+    {
+      "name": "dingbot.access-token",
+      "type": "java.lang.String",
+      "description": "DingTalk robot access_token parameter.",
+      "defaultValue": null
+    },
+    {
+      "name": "dingbot.secret.secret-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether the robot sign parameter configuration is enabled.",
+      "defaultValue": false
+    },
+    {
+      "name": "dingbot.secret.secret-token",
+      "type": "java.lang.String",
+      "description": "DingTalk robot secret_token parameter, start with SEC.",
+      "defaultValue": null
+    }
+  ]
+}

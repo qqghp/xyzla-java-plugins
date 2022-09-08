@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>成功注册通知</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+</head>
+<body>
+<div class="content">
+    <h1 class="massage-header">你的账户信息为</h1>
+    <div class="user-name">姓名：<em class="user-name-val">${name}</em></div>
+    <div class="user-name">用户名：<em class="user-name-val">${username}</em></div>
+    <div class="user-name">密码：<em class="user-name-val">${password}</em></div>
+    <div style="color: #555;"> 新账户内设备信息将在3-5个工作日内容录入，感谢您的理解和支持。</div>
+</div>
+
+<style>
+    .content{
+        width: 500px;
+        margin: 0 auto;
+        padding-top: 20px
+    }
+
+    .massage-header{
+        font-size: 30px;
+        color: #555;
+        padding: 10px 0 30px 0;
+        text-align: center
+    }
+
+    .user-name{
+        color: #555;
+        font-size: 16px;
+        margin-bottom: 20px
+    }
+
+    .user-name-val{
+        color: #20a0ff;
+        font-style: normal
+    }
+</style>
+</body>
+</html>
+

@@ -2,9 +2,9 @@ package com.xyzla.common.http;
 
 
 import com.xyzla.common.exception.ConnTimeOutException;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import javax.net.ssl.*;
 import java.io.BufferedReader;
@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -25,12 +26,12 @@ public class HttpConnector {
 
     public static final Logger logger = LoggerFactory.getLogger(HttpConnector.class);
 
-    public static String requestPost(String url, String param, boolean isSSL, Map<String, String> headers) throws Exception {
-        return connect(url, param, isSSL, "POST", headers);
+    public static String requestPost(String url, String param, Map<String, String> headers) throws Exception {
+        return connect(url, param, HttpMethod.POST, headers);
     }
 
-    public static String requestGet(String url, String param, boolean isSSL, Map<String, String> headers) throws Exception {
-        return connect(url, param, isSSL, "GET", headers);
+    public static String requestGet(String url, String param, Map<String, String> headers) throws Exception {
+        return connect(url, param, HttpMethod.GET, headers);
     }
 
     /**
@@ -39,9 +40,10 @@ public class HttpConnector {
      * @param url    post 请求，此时参数从 body 中传过来,body 为 json 类型
      * @param params 如果没有则为空
      */
-    private static String connect(String url, String params, boolean isSSL, String method, Map<String, String> headers) throws Exception {
-
-        if (isSSL) {
+    private static String connect(String url, String params, HttpMethod httpMethod, Map<String, String> headers) throws Exception {
+        boolean isSSL = false;
+        if (url.startsWith("https://")) {
+            isSSL = true;
             _ignoreSSL();
         }
 
@@ -51,18 +53,10 @@ public class HttpConnector {
         StringBuffer result = new StringBuffer();
 
         try {
-            if ("POST".equals(method)) {
+            if ("POST".equals(httpMethod.name())) {
                 URL urlEntity = new URL(url);
                 conn = (HttpURLConnection) urlEntity.openConnection();
-
-                if (headers != null && headers.containsKey("Content-Type")) {
-                    // conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                    conn.setRequestProperty("Content-Type", headers.get("Content-Type"));
-                    headers.remove("Content-Type");
-                } else {
-                    conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-                }
-            } else {
+            } else if ("GET".equalsIgnoreCase(httpMethod.name())) {
                 if (params == null) {
                     URL urlEntity = new URL(url);
                     conn = (HttpURLConnection) urlEntity.openConnection();
@@ -70,13 +64,23 @@ public class HttpConnector {
                     URL urlEntity = new URL(url + "?" + params);
                     conn = (HttpURLConnection) urlEntity.openConnection();
                 }
+            } else {
+                logger.error("unsuppport http method. {} {}", httpMethod.name(), url);
             }
-            conn.setRequestMethod(method);
+
+            if (headers != null && headers.containsKey("Content-Type")) {
+                conn.setRequestProperty("Content-Type", headers.get("Content-Type"));
+                headers.remove("Content-Type");
+            } else {
+                conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+            }
+
+            conn.setRequestMethod(httpMethod.name());
             conn.setRequestProperty("Connection", "Keep-Alive");
             conn.setUseCaches(false);
             conn.setDoOutput(true);
             conn.setDoInput(true);
-            if (StringUtils.isNotBlank(params)) {
+            if (StringUtils.hasText(params)) {
                 conn.setRequestProperty("Content-Length", "" + params.length());
             }
             if (headers != null && !headers.isEmpty()) {
@@ -85,14 +89,14 @@ public class HttpConnector {
                     String headerValue = entry.getValue();
                     conn.setRequestProperty(headerName, headerValue);
                     if (logger.isDebugEnabled()) {
-                        logger.debug("{} {}", headerName, headerValue);
+                        logger.debug("header {} {}", headerName, headerValue);
                     }
                 }
             }
 
-            if ("POST".equals(method)) {
-                if (StringUtils.isNotBlank(params)) {
-                    out = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
+            if ("POST".equals(httpMethod.name())) {
+                if (StringUtils.hasText(params)) {
+                    out = new OutputStreamWriter(conn.getOutputStream(), StandardCharsets.UTF_8);
                     out.write(params);
                     out.close();
                 }
@@ -105,13 +109,13 @@ public class HttpConnector {
             }
 
             String line = "";
-            in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+            in = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
             while ((line = in.readLine()) != null) {
                 result.append(line).append("\n");
             }
 
             if (logger.isDebugEnabled()) {
-                logger.debug(result.toString());
+                logger.debug("response {}", result.toString());
             }
 
             int responseCode = conn.getResponseCode();
@@ -150,7 +154,7 @@ public class HttpConnector {
             }
         } catch (IOException e) {
             StringBuffer errorMsg = new StringBuffer();
-            String line = StringUtils.EMPTY;
+            String line = "";
             in = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "utf-8"));
             while ((line = in.readLine()) != null) {
                 errorMsg.append(line).append("\n");

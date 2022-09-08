@@ -1,6 +1,12 @@
 package com.xyzla.common.exception;
 
-public class ApiAccessException extends Exception {
+import com.xyzla.common.util.JacksonUtil;
+import org.springframework.http.codec.cbor.Jackson2CborDecoder;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ApiAccessException extends RuntimeException {
     private Integer code;
     private String msg;
 
@@ -27,5 +33,13 @@ public class ApiAccessException extends Exception {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    @Override
+    public String toString() {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("code", code);
+        paramMap.put("msg", msg);
+        return JacksonUtil.toJson(paramMap);
     }
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="icon" type="image/x-icon" href="https://www.xyzla.com/favicon.ico">-->
+    <title>运营管理平台-账号注册成功通知</title>
+</head>
+<body style="width: 100%;height: 100%;margin: 0;padding: 0;overflow: hidden;">
+
+<div style="width: 100%;height: 100%;display: flex;flex-direction: column;">
+    <div style="height: 50px;background: rgb(10, 44, 64);display: flex;justify-content: space-between;border-bottom-color: #f6c41f;border-bottom-width: 20px;border-bottom-style: solid;align-items: center;padding: 0 25px;height: 110px;font-size: 25px;color: white;">
+        <div style="font-weight: bold;"> 账号注册成功！</div>
+        <div>
+            <a target="_blank" href="https://www.xyzla.com/"><img
+                    style=" width: 150px; height: 70px;background: #0b2c40;"
+                    src="https://www.xyzla.com/cdn/logo-big.png"></a>
+        </div>
+    </div>
+
+    <div style="flex: 1;">
+        <div style="padding-top: 30px;padding-left: 50px;line-height: 45px;">
+            <div style="font-weight: bold;">尊敬的用户${name}您好，</div>
+            <div style="font-weight: bold;margin-top: 10px;">感谢您注册运营管理平台
+                (<a class="color: #70a2d0;text-decoration: none;"
+                    href="https://xyzla.com/">https://xyzla.com/</a>),
+                您的账户信息如下：<br>用户名：${username}
+                <br>密&emsp;码：${password}
+            </div>
+
+            <div style="color:red"> 新账户内设备信息将在3-5个工作日内录入，感谢您的理解与支持。</div>
+            <div>登录平台后可在右上角“我的账号-修改密码”中修改账号密码。<br>此邮件无需回复，若有疑问请联系客户经理。</div>
+        </div>
+    </div>
+
+    <div style="width: 100%;height: 60px;background: #0d2b3e;">
+        <p style="color: #6e8494 ; padding-left: 50px;padding-right: 50px;">
+            Copyright 2017-<span>${year}</span> Xyzla.All rights reserved.
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -15,6 +15,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.WebServiceException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +52,11 @@ public abstract class BaseApi {
             stopWatch.start();
             Object result = supplier.get();
             stopWatch.stop();
-            logger.info("uri {} method {} header {} cost {} seconds", uri, method, apiVersion, stopWatch.getTotalTimeSeconds());
+            logger.info("method {} uri {} apiVersion {} cost {} millis",
+                    uri,
+                    method,
+                    apiVersion,
+                    stopWatch.getTotalTimeMillis());
             if (result == null) {
                 return ResBean.ofSuccess();
             } else if (result instanceof ResBean) {
@@ -61,10 +66,11 @@ public abstract class BaseApi {
             }
         } catch (ApiAccessException e) {
             logger.error(
-                    "{}",
-                    getRequestParamAsString(),
-                    e);
-            logger.error("Handle Post param error, {}, {}, {}", uri, apiVersion, e.toString());
+                    "method {} uri {} apiVersion {} toString {}",
+                    method,
+                    uri,
+                    apiVersion,
+                    e.toString());
             return ResBean.ofServerError(e.getCode(), e.getMessage());
         } catch (Exception e) {
             logger.error(

@@ -1,5 +1,6 @@
 package com.xyzla.common.exception;
 
+@Deprecated
 public class WebServiceException extends RuntimeException {
 
     public WebServiceException() {
@@ -13,7 +14,6 @@ public class WebServiceException extends RuntimeException {
     public WebServiceException(String message, Throwable cause) {
         super(message, cause);
     }
-
 
     public WebServiceException(Throwable cause) {
         super(cause);
