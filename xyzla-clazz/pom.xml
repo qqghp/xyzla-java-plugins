@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>xyzla-common</artifactId>
+    <artifactId>xyzla-clazz</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>

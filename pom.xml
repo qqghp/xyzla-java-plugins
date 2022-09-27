@@ -6,7 +6,7 @@
 
     <groupId>com.xyzla</groupId>
     <artifactId>xyzla-java-plugins</artifactId>
-    <version>1.1.17</version>
+    <version>1.1.18</version>
     <packaging>pom</packaging>
 
     <name>xyzla-java-plugins</name>
@@ -23,6 +23,7 @@
         <module>xyzla-spring-boot-dingbot</module>
         <module>xyzla-spring-boot-redis</module>
         <module>xyzla-spring-boot-mail</module>
+        <module>xyzla-clazz</module>
 
     </modules>
 
