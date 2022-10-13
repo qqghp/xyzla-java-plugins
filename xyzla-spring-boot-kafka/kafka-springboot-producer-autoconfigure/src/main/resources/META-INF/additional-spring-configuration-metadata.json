@@ -1,0 +1,17 @@
+{
+  "properties": [
+    {
+      "name": "kafka.bootstrap-servers",
+      "type": "java.lang.String",
+      "description": "your Kafka bootstrap servers",
+      "defaultValue": null
+    },
+    {
+      "name": "kafka.client-mark",
+      "type": "java.lang.String",
+      "description": "your kafak client mark.",
+      "defaultValue": null
+    }
+  ]
+}
+
