@@ -56,6 +56,12 @@ public class KafkaContext {
     @Value("${kafka.client-mark}")
     private String clientMark;
 
+    @Value("${kafka.max.partition.fetch.bytes:4096}")
+    private Integer maxPartitionFetchBytes;
+    @Value("${kafka.max.poll.interval.ms:100000}")
+    private Integer maxPollIntervalMs;
+    @Value("${kafka.max.poll.records:5}")
+    private Integer maxPollRecords;
 
     /**
      * 获取 Topic 的前缀
@@ -82,6 +88,18 @@ public class KafkaContext {
 
     public String getClientMark() {
         return clientMark;
+    }
+
+    public Integer getMaxPartitionFetchBytes() {
+        return maxPartitionFetchBytes;
+    }
+
+    public Integer getMaxPollIntervalMs() {
+        return maxPollIntervalMs;
+    }
+
+    public Integer getMaxPollRecords() {
+        return maxPollRecords;
     }
 
     /**

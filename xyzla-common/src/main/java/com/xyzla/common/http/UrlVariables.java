@@ -1,10 +1,14 @@
 package com.xyzla.common.http;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UrlVariables {
+    private static final Logger logger = LoggerFactory.getLogger(UrlVariables.class);
 
     public static String replace(String str, List<String> urlVariables) {
         int i = 0;
@@ -15,7 +19,9 @@ public class UrlVariables {
         while (m.find()) {
             String g = m.group();
             String target = g.substring(1, g.length() - 1);//去掉花括号
-            System.out.println(g + "   " + target);
+            if (logger.isDebugEnabled()) {
+                logger.debug("{} -> {}", g, target);
+            }
             str = str.replace(g, (String) urlVariables.get(i++));
         }
 

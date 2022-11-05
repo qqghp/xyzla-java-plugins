@@ -2,4 +2,6 @@ kafka.bootstrap-servers="KAFKA Bootstrap Servers"
 kafka.client-mark="Your Project Name"
 kafka.consumer.group-id="Kafka Conumser Group ID, 通常取值为 Group-{Proejct Name}"
 mq.topic.prefix="Topic 前缀, 通常取值为 ${spring.profiles.active}"
-
+kafka.max.partition.fetch.bytes=1024
+kafka.max.poll.interval.ms=100000
+kafka.max.poll.records=5

@@ -63,7 +63,13 @@ public class KafkaConsumerStarter {
                 adminService.checkAndCreateTopic(realTopic, partitions, replicationFactor);
             }
         });
-        ConsumerProperty consumerProperty = new ConsumerProperty(kafkaContext.getBootstrapServers(), kafkaContext.getGroupId(), topicConfigMap);
+        ConsumerProperty consumerProperty = new ConsumerProperty(
+                kafkaContext.getBootstrapServers(),
+                kafkaContext.getGroupId(),
+                kafkaContext.getMaxPartitionFetchBytes(),
+                kafkaContext.getMaxPollIntervalMs(),
+                kafkaContext.getMaxPollRecords(),
+                topicConfigMap);
 
         //启动 kafka 消费者
         consumer = new ConsumerListener(consumerProperty).startListen();

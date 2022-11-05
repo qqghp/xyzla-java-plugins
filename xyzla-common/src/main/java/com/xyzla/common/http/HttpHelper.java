@@ -44,10 +44,12 @@ public class HttpHelper {
 
 
         String body = null;
-        if (requestBody instanceof String) {
-            body = (String) requestBody;
-        } else {
-            body = JacksonUtil.toJson(requestBody);
+        if (requestBody != null) {
+            if (requestBody instanceof String) {
+                body = (String) requestBody;
+            } else {
+                body = JacksonUtil.toJson(requestBody);
+            }
         }
 
         try {
