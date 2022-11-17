@@ -1,0 +1,16 @@
+{
+  "properties": [
+    {
+      "name": "snowflake.datacenter-id",
+      "type": "java.lang.String",
+      "description": "snowflake.datacenter-id.",
+      "defaultValue": null
+    },
+    {
+      "name": "snowflake.worker-id",
+      "type": "java.lang.String",
+      "description": "snowflake.worker-id.",
+      "defaultValue": null
+    }
+  ]
+}

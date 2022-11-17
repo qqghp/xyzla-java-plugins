@@ -24,6 +24,7 @@
         <module>xyzla-spring-boot-redis</module>
         <module>xyzla-spring-boot-mail</module>
         <module>xyzla-clazz</module>
+        <module>xyzla-snowflake</module>
 
     </modules>
 
@@ -84,7 +85,6 @@
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
-
 
 
     <dependencyManagement>

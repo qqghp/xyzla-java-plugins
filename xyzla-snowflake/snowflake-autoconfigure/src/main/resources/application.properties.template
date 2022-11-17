@@ -1,0 +1,3 @@
+################################# snowflake #################################
+snowflake.datacenter-id=${SF_DATACENTER_ID}
+snowflake.worker-id=${SF_WORKER_ID}
