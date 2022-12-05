@@ -1,6 +1,8 @@
 package com.xyzla.common.api;
 
 import com.xyzla.common.api.response.ResBean;
+import com.xyzla.common.context.DriverContext;
+import com.xyzla.common.context.XyzlaServletContext;
 import com.xyzla.common.exception.ApiAccessException;
 import com.xyzla.common.function.Consumer;
 import com.xyzla.common.function.Handler;
@@ -43,8 +45,8 @@ public abstract class BaseApi {
 
     protected ResBean response(Supplier<Object> supplier) {
         HttpServletRequest request = getRequest();
+        XyzlaServletContext.setServletContext(getRequest(), getResponse());
         String uri = request.getRequestURI();
-        String apiVersion = request.getHeader("apiVer");
         String method = request.getMethod();
 
         try {
@@ -52,10 +54,9 @@ public abstract class BaseApi {
             stopWatch.start();
             Object result = supplier.get();
             stopWatch.stop();
-            logger.info("method {} uri {} apiVersion {} cost {} millis",
+            logger.info("method {} uri {} cost {} millis",
                     uri,
                     method,
-                    apiVersion,
                     stopWatch.getTotalTimeMillis());
             if (result == null) {
                 return ResBean.ofSuccess();
@@ -66,18 +67,13 @@ public abstract class BaseApi {
             }
         } catch (ApiAccessException e) {
             logger.error(
-                    "method {} uri {} apiVersion {} toString {}",
+                    "method {} uri {} toString {}",
                     method,
                     uri,
-                    apiVersion,
                     e.toString());
             return ResBean.ofServerError(e.getCode(), e.getMessage());
         } catch (Exception e) {
-            logger.error(
-                    "{}",
-                    getRequestParamAsString(),
-                    e);
-            logger.error("Handle Post other exception, {}, {}, {}", uri, apiVersion, e);
+            logger.error("Handle Post other exception, {} {}", uri, getRequestParamAsString(), e);
             return ResBean.ofServerError("internal error");
         }
     }
