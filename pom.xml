@@ -86,7 +86,6 @@
         </snapshotRepository>
     </distributionManagement>
 
-
     <dependencyManagement>
         <dependencies>
             <!-- spring boot / cloud -->
