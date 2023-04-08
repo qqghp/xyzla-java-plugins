@@ -149,24 +149,25 @@ public class ZipUtil {
 
 
     public static void main(String[] args) throws Exception {
-        String targetFolderPath = "/Users/ryan/workspace/CARRIER_CM_M2M_XA";
-        String rawZipFilePath = "/Users/ryan/workspace/raw.zip";
-        String newZipFilePath = "/Users/ryan/workspace/new.zip";
+        String targetFolderPath = "/home/ryan/o/20230306";
+        String rawZipFilePath = "/home/ryan/o/raw.zip";
+        String newZipFilePath = "/home/ryan/o/new.zip";
 
 //        //将Zip文件解压缩到目标目录
 //        new ZipService().decompress(rawZipFilePath, targetFolderPath);
 
         //将目标目录的文件压缩成Zip文件
-//        new ZipService().compress(targetFolderPath, newZipFilePath);
-        StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
-        new ZipUtil().zipFile("/Users/ryan/workspace/CARRIER_CM_M2M_XA/xian/2929222165_202105_20210521_6.txt", "/Users/ryan/workspace/2929222165_202105_20210521_6.zip");
-        stopWatch.stop();
-        System.out.println(stopWatch.getTotalTimeMillis());
-        StopWatch stopWatch2 = new StopWatch();
-        stopWatch2.start();
-        new ZipUtil().compress("/Users/ryan/workspace/CARRIER_CM_M2M_XA/xian/2929222165_202105_20210521_6.txt", "/Users/ryan/workspace/2929222165_202105_20210521_6_2.zip");
-        stopWatch2.stop();
-        System.out.println(stopWatch2.getTotalTimeMillis());
+        ZipUtil.compress(targetFolderPath, newZipFilePath);
+
+//        StopWatch stopWatch = new StopWatch();
+//        stopWatch.start();
+//        new ZipUtil().zipFile("/Users/ryan/workspace/CARRIER_CM_M2M_XA/xian/2929222165_202105_20210521_6.txt", "/Users/ryan/workspace/2929222165_202105_20210521_6.zip");
+//        stopWatch.stop();
+//        System.out.println(stopWatch.getTotalTimeMillis());
+//        StopWatch stopWatch2 = new StopWatch();
+//        stopWatch2.start();
+//        new ZipUtil().compress("/Users/ryan/workspace/CARRIER_CM_M2M_XA/xian/2929222165_202105_20210521_6.txt", "/Users/ryan/workspace/2929222165_202105_20210521_6_2.zip");
+//        stopWatch2.stop();
+//        System.out.println(stopWatch2.getTotalTimeMillis());
     }
 }
