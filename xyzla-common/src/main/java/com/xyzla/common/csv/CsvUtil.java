@@ -14,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CsvUtil {
@@ -103,6 +104,37 @@ public class CsvUtil {
             logger.error("error: {}", e);
         }
         return allData;
+    }
+
+
+    /**
+     * 分批 读取 csv 文件
+     *
+     * @param csvPath
+     * @param skip
+     * @param limit
+     * @return
+     */
+    public static List<String[]> readSkipLimit(String csvPath, int skip, int limit) {
+        List<String[]> rows = new ArrayList<>();
+        Path myPath = Paths.get(csvPath);
+        CSVParser parser = new CSVParserBuilder().withSeparator(CSVWriter.DEFAULT_SEPARATOR).build();
+        try (BufferedReader br = Files.newBufferedReader(myPath, StandardCharsets.UTF_8);
+             CSVReader reader = new CSVReaderBuilder(br).withSkipLines(skip).withCSVParser(parser).build()) {
+            String[] row;
+            while ((row = reader.readNext()) != null) {
+                rows.add(row);
+                // 当 list 到达单批次最大数量后 直接返回
+                if (rows.size() == limit) {
+                    return rows;
+                }
+            }
+        } catch (IOException ex) {
+            logger.error("io exception", ex);
+        } catch (CsvException ex) {
+            logger.error("csv exception", ex);
+        }
+        return rows;
     }
 
     public static List<String[]> read(char sepator, String path) throws IOException, CsvException {
