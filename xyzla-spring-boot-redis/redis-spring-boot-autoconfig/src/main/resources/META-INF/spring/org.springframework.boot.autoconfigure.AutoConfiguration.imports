@@ -1,0 +1,2 @@
+com.xyzla.common.redis.autoconfigure.RedisAutoConfiguration
+com.xyzla.common.redis.autoconfigure.JacksonConfig

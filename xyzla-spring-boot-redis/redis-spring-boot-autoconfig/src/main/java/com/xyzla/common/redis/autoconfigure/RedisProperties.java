@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 /**
  * configuration must begin with this prefix 限定使用此 starter 的 redis 配置必须以 “spring.redis.” 为前缀 示例:
  * <br>
@@ -13,7 +11,7 @@ import java.util.List;
  * spring.redis.port
  */
 @Component
-@ConfigurationProperties(prefix = "spring.redis")
+@ConfigurationProperties(prefix = "spring.data.redis")
 public class RedisProperties {
 
     /**
@@ -21,42 +19,42 @@ public class RedisProperties {
      * cluster
      * sentinel
      */
-    @Value("${spring.redis.cluster.mode:standalone")
+    @Value("${spring.data.redis.mode:standalone")
     private String mode;
 
-    @Value("${spring.redis.port:6379}")
+    @Value("${spring.data.redis.port:6379}")
     private int port;
-    @Value("${spring.redis.host:127.0.0.1}")
+    @Value("${spring.data.redis.host:127.0.0.1}")
     private String host;
 
-    @Value("${spring.redis.password:}")
+    @Value("${spring.data.redis.password:}")
     private String password;
 
-    @Value("${spring.redis.timeout:600}")
+    @Value("${spring.data.redis.timeout:600}")
     private int timeout;
 
-    @Value("${spring.redis.database:0}")
+    @Value("${spring.data.redis.database:0}")
     private int database;
 
-    @Value("${spring.redis.lettuce.pool.max-active:50}")
+    @Value("${spring.data.redis.lettuce.pool.max-active:50}")
     private int maxActive;
 
-    @Value("${spring.redis.lettuce.pool.max-wait:5000}")
+    @Value("${spring.data.redis.lettuce.pool.max-wait:5000}")
     private int maxWait;
 
-    @Value("${spring.redis.lettuce.pool.max-idle:50}")
+    @Value("${spring.data.redis.lettuce.pool.max-idle:50}")
     private int maxIdle;
 
-    @Value("${spring.redis.lettuce.pool.min-idle:10}")
+    @Value("${spring.data.redis.lettuce.pool.min-idle:10}")
     private int minIdle;
 
-    @Value("${spring.redis.lettuce.pool.time-between-eviction-runs:2000}")
+    @Value("${spring.data.redis.lettuce.pool.time-between-eviction-runs:2000}")
     private int timeBetweenEvictionRuns;
 
-    @Value("${spring.redis.lettuce.cluster.refresh.period:60}")
+    @Value("${spring.data.redis.lettuce.cluster.refresh.period:60}")
     private int period;
 
-    @Value("${spring.redis.lettuce.cluster.refresh.period:3}")
+    @Value("${spring.data.redis.lettuce.cluster.refresh.period:3}")
     private int maxRedirects;
 
     public int getPort() {

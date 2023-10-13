@@ -11,14 +11,16 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.LocalDate;
@@ -29,13 +31,16 @@ import java.time.format.DateTimeFormatter;
 @Configuration
 public class RedisTemplateConfiguration {
 
-    @Bean(name = "redisTemplate")
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
+    @Resource
+    private RedisConnectionFactory connectionFactory;
 
+    @Bean(name = "redisTemplate")
+    public RedisTemplate<String, Object> redisTemplate() {
+        System.out.println("redisTemplate init...");
         RedisTemplate redisTemplate = new RedisTemplate();
         redisTemplate.setConnectionFactory(connectionFactory);
 
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
 
@@ -69,8 +74,9 @@ public class RedisTemplateConfiguration {
         om.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         om.registerModule(timeModule);
 
-        jackson2JsonRedisSerializer.setObjectMapper(om);
-        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+        RedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(om, Object.class);
+        // jackson2JsonRedisSerializer.setObjectMapper(om);
+        RedisSerializer stringRedisSerializer = new StringRedisSerializer();
         // key采用String的序列化方式
         redisTemplate.setKeySerializer(stringRedisSerializer);
         // hash的key也采用String的序列化方式
@@ -87,9 +93,10 @@ public class RedisTemplateConfiguration {
 
     @Bean(name = "stringRedisTemplate")
     @ConditionalOnMissingBean
-    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+    public StringRedisTemplate stringRedisTemplate() {
+        System.out.println("stringRedisTemplate init...");
         StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
-        stringRedisTemplate.setConnectionFactory(redisConnectionFactory);
+        stringRedisTemplate.setConnectionFactory(connectionFactory);
         return stringRedisTemplate;
     }
     // 更多模板注入.....

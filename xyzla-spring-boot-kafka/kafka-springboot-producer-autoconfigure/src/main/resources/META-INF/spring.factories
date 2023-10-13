@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.xyzla.mq.configuration.KafkaProducerConfiguration,\
-  com.xyzla.mq.configuration.KafkaContext

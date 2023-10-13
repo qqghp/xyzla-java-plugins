@@ -4,6 +4,7 @@ import io.lettuce.core.ReadFrom;
 import io.lettuce.core.TimeoutOptions;
 import io.lettuce.core.cluster.ClusterClientOptions;
 import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
+import jakarta.annotation.Resource;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.CacheManager;
@@ -26,18 +27,21 @@ import java.util.List;
 
 @Configuration
 //@ConditionalOnClass(AbstractRedisClient.class)
-@ConditionalOnProperty(prefix = "spring.redis.cluster", name = "mode", havingValue = "cluster")
+@ConditionalOnProperty(prefix = "spring.data.redis", name = "mode", havingValue = "cluster")
 public class RedisClusterLettuceConfiguration {
 
+    @Resource
+    private RedisProperties redisProperties;
+    @Resource
+    private RedisClusterProperties redisClusterProperties;
 
     /**
      * https://support.huaweicloud.com/intl/en-us/usermanual-dcs/dcs-ug-211203001.html
      *
-     * @param redisProperties
      * @return
      */
     @Bean
-    public LettuceConnectionFactory lettuceConnectionFactory(RedisProperties redisProperties, RedisClusterProperties redisClusterProperties) {
+    public LettuceConnectionFactory connectionFactory() {
         GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
         genericObjectPoolConfig.setMaxIdle(redisProperties.getMaxIdle());
         genericObjectPoolConfig.setMinIdle(redisProperties.getMinIdle());
@@ -56,22 +60,15 @@ public class RedisClusterLettuceConfiguration {
         redisClusterConfiguration.setPassword(redisProperties.getPassword());
         redisClusterConfiguration.setMaxRedirects(redisProperties.getMaxRedirects());
         // Configure automated topology refresh.
-        ClusterTopologyRefreshOptions topologyRefreshOptions = ClusterTopologyRefreshOptions.builder()
-                .enablePeriodicRefresh(Duration.ofSeconds(redisProperties.getPeriod())) // Refresh the topology periodically.
+        ClusterTopologyRefreshOptions topologyRefreshOptions = ClusterTopologyRefreshOptions.builder().enablePeriodicRefresh(Duration.ofSeconds(redisProperties.getPeriod())) // Refresh the topology periodically.
                 .enableAllAdaptiveRefreshTriggers() // Refresh the topology based on events.
                 .build();
 
         ClusterClientOptions clusterClientOptions = ClusterClientOptions.builder()
                 // Redis command execution timeout. Only when the command execution times out will a reconnection be triggered using the new topology.
-                .timeoutOptions(TimeoutOptions.enabled(Duration.ofSeconds(redisProperties.getPeriod())))
-                .topologyRefreshOptions(topologyRefreshOptions)
-                .build();
-        LettuceClientConfiguration clientConfig = LettucePoolingClientConfiguration.builder()
-                .commandTimeout(Duration.ofSeconds(redisProperties.getTimeout()))
-                .poolConfig(genericObjectPoolConfig)
-                .readFrom(ReadFrom.REPLICA_PREFERRED) // Preferentially read data from the replicas.
-                .clientOptions(clusterClientOptions)
-                .build();
+                .timeoutOptions(TimeoutOptions.enabled(Duration.ofSeconds(redisProperties.getPeriod()))).topologyRefreshOptions(topologyRefreshOptions).build();
+        LettuceClientConfiguration clientConfig = LettucePoolingClientConfiguration.builder().commandTimeout(Duration.ofSeconds(redisProperties.getTimeout())).poolConfig(genericObjectPoolConfig).readFrom(ReadFrom.REPLICA_PREFERRED) // Preferentially read data from the replicas.
+                .clientOptions(clusterClientOptions).build();
         LettuceConnectionFactory factory = new LettuceConnectionFactory(redisClusterConfiguration, clientConfig);
         return factory;
     }
@@ -82,15 +79,8 @@ public class RedisClusterLettuceConfiguration {
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         //默认1
-        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofHours(1))
-                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer()))
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(valueSerializer()))
-                .disableCachingNullValues();
-        RedisCacheManager redisCacheManager = RedisCacheManager.builder(connectionFactory)
-                .cacheDefaults(config)
-                .transactionAware()
-                .build();
+        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(1)).serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer())).serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(valueSerializer())).disableCachingNullValues();
+        RedisCacheManager redisCacheManager = RedisCacheManager.builder(connectionFactory).cacheDefaults(config).transactionAware().build();
         return redisCacheManager;
     }
 

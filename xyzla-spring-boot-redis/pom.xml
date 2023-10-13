@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.xyzla</groupId>
         <artifactId>xyzla-java-plugins</artifactId>
-        <version>1.1.19</version>
+        <version>1.2.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -19,4 +19,30 @@
         <module>redis-spring-boot-autoconfig</module>
         <module>redis-spring-boot-starter-test</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <argLine>-Xmx1024m</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

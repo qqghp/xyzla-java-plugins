@@ -1,6 +1,5 @@
 package com.xyzla.common.redis.autoconfigure;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -13,12 +12,12 @@ import java.util.List;
  * spring.redis.port
  */
 @Component
-@ConfigurationProperties(prefix = "spring.redis.cluster")
+@ConfigurationProperties(prefix = "spring.data.redis.cluster")
 public class RedisClusterProperties {
 
     /**
-     * spring.redis.cluster.nodes[0] = 127.0.0.1:7379
-     * spring.redis.cluster.nodes[1] = 127.0.0.1:7380
+     * spring.data.redis.cluster.nodes[0] = 127.0.0.1:7379
+     * spring.data.redis.cluster.nodes[1] = 127.0.0.1:7380
      */
     private List<String> nodes;
 

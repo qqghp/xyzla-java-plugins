@@ -4,14 +4,12 @@ import com.xyzla.redis.RedisApplication;
 import com.xyzla.redis.entity.Device;
 import com.xyzla.redis.util.JacksonUtil;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,8 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @SpringBootTest(classes = RedisApplication.class)
-@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = {RedisTemplateConfiguration.class, RedisProperties.class, RedisLettuceConfiguration.class})
+//@ContextConfiguration(classes = {RedisTemplateConfiguration.class, RedisProperties.class, RedisLettuceConfiguration.class, JacksonConfig.class, RedisLettuceConfiguration.class})
 @EnableAutoConfiguration
 @ActiveProfiles("dev")
 public class RedisTest {
@@ -40,10 +37,10 @@ public class RedisTest {
     @Test
     public void redisTemplateList() {
         redisTemplate.opsForList().leftPush(XYZLA_USERLIST_TOP, "wanggang");
-        redisTemplate.opsForList().leftPush(XYZLA_USERLIST_TOP, "wangsan");
+        redisTemplate.opsForList().leftPush(XYZLA_USERLIST_TOP, "w,angsan");
         redisTemplate.opsForList().leftPush(XYZLA_USERLIST_TOP, "wangermazi");
-        System.out.println((String) redisTemplate.opsForList().rightPop(XYZLA_USERLIST_TOP));
-        System.out.println((String) redisTemplate.opsForList().rightPop(XYZLA_USERLIST_TOP));
+//        System.out.println((String) redisTemplate.opsForList().rightPop(XYZLA_USERLIST_TOP));
+//        System.out.println((String) redisTemplate.opsForList().rightPop(XYZLA_USERLIST_TOP));
         //
         // System.out.println((String)redisTemplate.opsForList().rightPop(XYZLA_USERLIST_TOP));
 

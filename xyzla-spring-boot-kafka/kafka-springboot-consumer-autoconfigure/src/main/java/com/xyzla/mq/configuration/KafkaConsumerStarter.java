@@ -4,14 +4,14 @@ import com.xyzla.mq.Consumer;
 import com.xyzla.mq.SpringContextHolder;
 import com.xyzla.mq.kafka.*;
 import com.xyzla.mq.Listener;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;

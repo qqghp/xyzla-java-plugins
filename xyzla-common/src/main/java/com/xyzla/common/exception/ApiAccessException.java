@@ -1,7 +1,6 @@
 package com.xyzla.common.exception;
 
 import com.xyzla.common.util.JacksonUtil;
-import org.springframework.http.codec.cbor.Jackson2CborDecoder;
 
 import java.util.HashMap;
 import java.util.Map;

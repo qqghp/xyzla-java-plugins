@@ -1,13 +1,14 @@
 package com.xyzla.common.api;
 
 import com.xyzla.common.api.response.ResBean;
-import com.xyzla.common.context.DriverContext;
 import com.xyzla.common.context.XyzlaServletContext;
 import com.xyzla.common.exception.ApiAccessException;
 import com.xyzla.common.function.Consumer;
 import com.xyzla.common.function.Handler;
 import com.xyzla.common.function.Supplier;
 import com.xyzla.common.util.JacksonUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
@@ -15,9 +16,6 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.WebServiceException;
 import java.util.HashMap;
 import java.util.Map;
 

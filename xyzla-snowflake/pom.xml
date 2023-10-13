@@ -5,7 +5,7 @@
     <parent>
         <artifactId>xyzla-java-plugins</artifactId>
         <groupId>com.xyzla</groupId>
-        <version>1.1.19</version>
+        <version>1.2.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -16,5 +16,25 @@
         <module>snowflake-autoconfigure</module>
         <module>snowflake-starter</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>none</mainClass>         <!-- 取消查找本项目下的Main方法：为了解决Unable to find main class的问题 -->
+                    <classifier>execute</classifier>    <!-- 为了解决依赖模块找不到此模块中的类或属性 -->
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

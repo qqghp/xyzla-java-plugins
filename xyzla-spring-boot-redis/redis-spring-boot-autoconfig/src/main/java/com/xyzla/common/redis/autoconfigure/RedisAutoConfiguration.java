@@ -15,6 +15,7 @@ import org.springframework.data.redis.core.RedisOperations;
                 RedisClusterLettuceConfiguration.class,
                 RedisLettuceConfiguration.class,
                 RedisProperties.class,
+                RedisClusterProperties.class,
                 RedisTemplateConfiguration.class
         })
 public class RedisAutoConfiguration {

@@ -2,7 +2,6 @@ package com.xyzla.common.redis.autoconfigure;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +16,6 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 import java.text.SimpleDateFormat;
@@ -35,8 +33,9 @@ public class JacksonConfig {
 
     @Bean(name = "jackson2JsonRedisSerializer")
     public Jackson2JsonRedisSerializer jackson2JsonRedisSerializer(@Qualifier("redisObjectMapper") ObjectMapper redisObjectMapper) {
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-        jackson2JsonRedisSerializer.setObjectMapper(redisObjectMapper);
+        System.out.println("jackson2Json init...");
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(redisObjectMapper, Object.class);
+        // jackson2JsonRedisSerializer.setObjectMapper(redisObjectMapper);
         return jackson2JsonRedisSerializer;
     }
 

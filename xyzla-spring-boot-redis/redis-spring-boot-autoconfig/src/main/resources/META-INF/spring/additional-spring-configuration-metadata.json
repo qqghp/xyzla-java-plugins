@@ -1,52 +1,58 @@
 {
   "properties": [
     {
-      "name": "spring.redis.lettuce.pool.max-active",
+      "name": "spring.data.redis.lettuce.pool.max-active",
       "type": "java.lang.Integer",
       "description": "Redis Pool Max Active, include token.",
       "defaultValue": 50
     },
     {
-      "name": "spring.redis.lettuce.pool.max-idle",
+      "name": "spring.data.redis.lettuce.pool.max-idle",
       "type": "java.lang.Integer",
       "description": "Redis Pool Max Idle, not include any parameters.",
       "defaultValue": 50
     },
     {
-      "name": "spring.redis.lettuce.pool.min-idle",
+      "name": "spring.data.redis.lettuce.pool.min-idle",
       "type": "java.lang.Integer",
       "description": "Redis Pool Max Idle, not include any parameters.",
       "defaultValue": 10
     },
     {
-      "name": "spring.redis.lettuce.pool.max-wait",
+      "name": "spring.data.redis.lettuce.pool.max-wait",
       "type": "java.lang.Integer",
       "description": "Redis Pool Max Wait.",
       "defaultValue": 5000
     },
     {
-      "name": "spring.redis.host",
+      "name": "spring.data.redis.host",
       "type": "java.lang.String",
       "description": "Redis Host.",
       "defaultValue": "127.0.0.1"
     },
     {
-      "name": "spring.redis.port",
+      "name": "spring.data.redis.port",
       "type": "java.lang.Integer",
       "description": "Redis Port.",
       "defaultValue": 6379
     },
     {
-      "name": "spring.redis.timeout",
+      "name": "spring.data.redis.timeout",
       "type": "java.lang.Integer",
       "description": "Redis Timeout.",
       "defaultValue": 6000
     },
     {
+      "name": "spring.data.redis.mode",
+      "type": "java.lang.String",
+      "description": "Redis Database. 0 ~ 15",
+      "defaultValue": 0
+    },
+    {
       "name": "spring.redis.database",
       "type": "java.lang.Integer",
-      "description": "Redis Database.",
-      "defaultValue": 0
+      "description": "Redis Mode: standalone or cluster",
+      "defaultValue": "standalone"
     }
   ]
 }

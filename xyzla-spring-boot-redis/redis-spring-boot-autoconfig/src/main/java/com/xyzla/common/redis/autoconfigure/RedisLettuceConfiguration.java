@@ -1,12 +1,7 @@
 package com.xyzla.common.redis.autoconfigure;
 
-import io.lettuce.core.AbstractRedisClient;
-import io.lettuce.core.ReadFrom;
-import io.lettuce.core.TimeoutOptions;
-import io.lettuce.core.cluster.ClusterClientOptions;
-import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
+import jakarta.annotation.Resource;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
@@ -24,8 +19,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.util.StringUtils;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 
 /*
  * {@like @ConditionalOnClass: This annotation indicates that there must be RedisOperations in the
@@ -34,10 +27,15 @@ import java.util.List;
  */
 @Configuration
 //@ConditionalOnClass(AbstractRedisClient.class)
-@ConditionalOnProperty(prefix = "spring.redis.cluster", name = "mode", havingValue = "standalone")
+@ConditionalOnProperty(prefix = "spring.data.redis", name = "mode", havingValue = "standalone")
 public class RedisLettuceConfiguration {
+
+    @Resource
+    private RedisProperties redisProperties;
+
     @Bean
-    public LettuceConnectionFactory connectionFactory(RedisProperties redisProperties) {
+    public LettuceConnectionFactory connectionFactory() {
+        System.out.println("connectionFactory init...");
         //定义redis链接池
         GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
         poolConfig.setMaxTotal(redisProperties.getMaxActive());
