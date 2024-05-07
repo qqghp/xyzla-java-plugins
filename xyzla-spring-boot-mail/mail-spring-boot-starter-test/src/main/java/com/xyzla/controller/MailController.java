@@ -21,16 +21,11 @@ public class MailController {
     @Autowired
     MailHelper mailHelper;
 
-    @Value("${sendFrom}")
-    private String sendFrom;
-
-    @Value("${sendTo}")
-    private String sendTo;
-
     @RequestMapping("sendTemplateMail")
     public void sendTemplateMail() {
         String subject = "[No-reply]通讯运营管理平台-账号注册成功通知";
         String tmplate = "customRegisterSuccessNotifyToUser.html";
+        String sendTo = "";
 
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("name", "FengLin Li");
@@ -38,28 +33,48 @@ public class MailController {
         model.put("password", "test@2021");
         model.put("year", LocalDateTime.now().getYear());
 
-        mailHelper.sendTemplateMail(sendFrom, sendTo, subject, tmplate, model);
+        mailHelper.sendTemplateMail(sendTo, subject, tmplate, model);
+    }
+
+
+    @RequestMapping("sendHtmlMail")
+    public void sendHtmlMail() {
+        String subject = "[No-reply]通讯运营管理平台-账号注册成功通知";
+        String tmplate = "customRegisterSuccessNotifyToUser.html";
+        String sendTo = "";
+
+        Map<String, Object> model = new HashMap<String, Object>();
+        model.put("name", "FengLin Li");
+        model.put("username", "Ryan");
+        model.put("password", "test@2021");
+        model.put("year", LocalDateTime.now().getYear());
+
+        String[] toWho = new String[]{"xqghp@126.com", "desmo@showmac.com", "ryan@showmac.com"};
+
+        mailHelper.sendHtmlMail(subject, tmplate, model, toWho);
     }
 
     @RequestMapping("sendSimpleMail")
     public void sendSimpleMail() {
         String subject = "注册成功";
         String content = "Hi,欢迎您注册xxx!";
+        String sendTo = "";
 
-        mailHelper.sendSimpleMail(sendFrom, sendTo, subject, content);
+        mailHelper.sendSimpleMail(sendTo, subject, content);
     }
 
     @RequestMapping("sendAttachmentMail")
     public void sendAttachmentMail() {
         String subject = "[NoReploy][xx]管理平台注册成功";
         String content = "欢迎您注册成功<p/>请查收附件";
+        String sendTo = "";
 
         Map<String, File> fileMap = new HashMap<>();
 
         fileMap.put("pushApiJavaSample.zip", new File("/home/ryan/o/pushApiJavaSample.zip"));
         fileMap.put("promtail-local-config.yaml", new File("/home/ryan/o/promtail-local-config.yaml"));
 
-        mailHelper.sendAttachmentMail(sendFrom, sendTo, subject, content, fileMap);
+        mailHelper.sendAttachmentMail(sendTo, subject, content, fileMap);
     }
 
 }

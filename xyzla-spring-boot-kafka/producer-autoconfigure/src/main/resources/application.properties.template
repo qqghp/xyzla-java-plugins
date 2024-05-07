@@ -1,0 +1,4 @@
+kafka.bootstrap-servers="KAFKA Bootstrap Servers"
+kafka.client-mark="Your Project Name"
+mq.topic.prefix="Topic 前缀, 通常取值为 ${spring.profiles.active}"
+

@@ -3,6 +3,7 @@
 spring.mail.host=smtp.gmail.com
 spring.mail.port=587
 ##
+spring.mail.nice=false
 spring.mail.username=<login user to smtp server>
 spring.mail.password=<login password to smtp server>
 ##
