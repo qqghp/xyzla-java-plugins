@@ -20,7 +20,5 @@
         <module>kafka-spring-boot-starter-test</module>
         <module>kafka-springboot-producer-autoconfigure</module>
         <module>kafka-springboot-consumer-autoconfigure</module>
-        <module>producer-autoconfigure</module>
-
     </modules>
 </project>
